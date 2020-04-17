@@ -1,0 +1,1027 @@
+#GCN
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 GATonly.py --random --n_train $b --fastmode --dropout 0.5 --model GCN_SP
+done
+total accuracy 0.6554
+total accuracy 0.7384
+total accuracy 0.7661
+total accuracy 0.7853
+total accuracy 0.7934
+
+#GCN with structual similarity
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --random --n_train $b --fastmode --model GCN_SP
+done
+total accuracy 0.6625
+total accuracy 0.7391
+total accuracy 0.7674
+total accuracy 0.7848
+total accuracy 0.7941
+
+#GAT
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 GATonly.py --random --n_train $b --hidden1 8 --fastmode --dropout 0.6 --model GAT_SP
+done
+total accuracy 0.6537
+total accuracy 0.7353
+total accuracy 0.7687
+total accuracy 0.7867
+total accuracy 0.7946
+
+#GAT with structual similarity
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --random --n_train $b --hidden1 8 --fastmode --dropout 0.6 --model GAT_SP
+done
+total accuracy 0.6680
+total accuracy 0.7430
+total accuracy 0.7743
+total accuracy 0.7906
+total accuracy 0.8001
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 6 \* $a`
+    #b=`expr $a \/ 10`
+    python3 train_times.py --random --n_train $b --model GAT_SP --times 100 --dataset citeseer --alpha 0
+    #a=`expr $a + 1`
+done
+total accuracy 0.6022
+total accuracy 0.6585
+total accuracy 0.6734
+total accuracy 0.6811
+total accuracy 0.6903
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 6 \* $a`
+    #b=`expr $a \/ 10`
+    python3 train_times.py --random --n_train $b --model GAT_SP --times 100 --dataset citeseer --alpha 0.5
+    #a=`expr $a + 1`
+done
+total accuracy 0.6142
+total accuracy 0.6647
+total accuracy 0.6811
+total accuracy 0.6898
+total accuracy 0.6977
+
+
+##############################epoch200の壁###################
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_validation.py --random --n_train $b --model GAT_SP --times 100 --epoch 100000 --alpha 0
+done
+echo "" >> log.txt
+total accuracy 0.6754
+total accuracy 0.7518
+total accuracy 0.7759
+total accuracy 0.7901
+total accuracy 0.8033
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_validation.py --random --n_train $b --model GAT_SP --times 100 --epoch 100000 --alpha 0.5
+done
+
+total accuracy 0.6899
+total accuracy 0.7499
+total accuracy 0.7750
+total accuracy 0.7951
+total accuracy 0.8032
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 6 \* $a`
+    python3 train_validation.py --random --n_train $b --model GAT_SP --times 100 --dataset citeseer --epoch 100000 --alpha 0
+done
+echo "" >> log.txt
+total accuracy 0.6164
+total accuracy 0.6655
+total accuracy 0.6811
+total accuracy 0.6926
+total accuracy 0.6954
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 6 \* $a`
+    python3 train_validation.py --random --n_train $b --model GAT_SP --times 100 --dataset citeseer --epoch 100000 --alpha 0.5
+done
+total accuracy 0.6272
+total accuracy 0.6673
+total accuracy 0.6884
+total accuracy 0.6975
+total accuracy 0.7023
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.*py --random --n_train $b --model GAT_SP --times 100 --epoch 100000 --alpha 0.9 --dropout 0.6
+done
+total accuracy 59.0300 ± 8.3841
+total accuracy 65.3300 ± 5.3112
+total accuracy 68.7400 ± 3.3939
+total accuracy 71.8700 ± 4.8381
+total accuracy 74.6300 ± 3.7250
+
+#1-1
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_1-1.py --random --n_train $b --model GAT_SP --times 20 --epoch 100000 --alpha 0.5
+done
+total accuracy 71.8000 ± 3.1923 total accuracy 70.5650 ± 5.5121
+total accuracy 76.6250 ± 2.6811
+total accuracy 78.6350 ± 1.5945
+total accuracy 78.7800 ± 1.7301
+total accuracy 80.0200 ± 1.9017
+
+#2
+python3 train_times_plusz.py --random --n_train 4 --model GAT_SP --times 50 --epoch 100000 --alpha 0.5 --beta 0.01
+total accuracy 68.8860 ± 4.5916
+total accuracy 80.5400 ± 1.5439
+python3 train_times_plusz.py --random --n_train 4 --model GAT_SP --times 50 --epoch 100000 --alpha 0.5 --beta 0.1
+total accuracy 68.8280 ± 5.2767
+total accuracy 81.0360 ± 1.5723
+python3 train_times_plusz.py --random --n_train 4 --model GAT_SP --times 50 --epoch 100000 --alpha 0.5 --beta 0.5
+total accuracy 67.8560 ± 3.7757
+total accuracy 80.5500 ± 1.5163
+python3 train_times_plusz.py --random --n_train 4 --model GAT_SP --times 50 --epoch 100000 --alpha 0.5 --beta 1
+total accuracy 68.4420 ± 4.9300
+total accuracy 80.3940 ± 1.4804
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --random --n_train $b --model GAT_SP --times 50 --epoch 100000 --alpha 0 --hidden1 8 --dropout 0.6
+done
+total accuracy 67.3660 ± 5.6646
+total accuracy 74.7500 ± 2.1387
+total accuracy 77.3940 ± 2.1046
+total accuracy 79.4400 ± 2.0252
+total accuracy 80.2280 ± 1.4828
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --random --n_train $b --model GAT_SP --times 50 --epoch 100000 --alpha 0.5 --hidden1 8 --dropout 0.6
+done
+total accuracy 67.6580 ± 4.6645
+total accuracy 75.1640 ± 2.9999
+total accuracy 78.2140 ± 2.0497
+total accuracy 79.3120 ± 1.7545
+total accuracy 80.8700 ± 1.4476
+
+
+#python3 train_times.py --model GAT_SP --random --n_train 4 --alpha 0 --patience 100 --times 50 --struc_feat eigen --epoch 100000
+#total accuracy 69.6620 ± 3.4575
+#python3 train_times.py --model GAT_SP --random --n_train 4 --alpha 0.5 --patience 100 --times 50 --struc_feat eigen --epoch 100000
+#total accuracy 68.9820 ± 3.7261
+
+#citeseer eigen
+total accuracy 62.2100 ± 3.7541
+total accuracy 61.8200 ± 4.1089
+
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --model GAT_SP --random --n_train $b --alpha 0 --patience 100 --times 50 --struc_feat eigen --epoch 100000
+done
+total accuracy 66.6040 ± 5.1414
+[48.22482803 65.93953916 63.50716416 64.26935829 64.49997327 62.43304507
+ 67.58476633 64.79211719 77.816851   87.40181256]
+total accuracy 75.5380 ± 2.2714
+[60.78837898 79.44036198 73.9857212  75.36684271 72.26829559 72.38059119
+ 75.95643485 73.30481778 83.43292892 89.128815  ]
+total accuracy 78.0040 ± 2.1168
+[64.9960425  81.80587082 77.37805036 77.09622658 74.6187727  75.5682898
+ 78.21740775 75.0735119  84.46211829 90.7439002 ]
+total accuracy 79.2160 ± 1.5237
+[65.90463694 84.60587253 78.4963786  79.03048486 74.87007909 77.34724355
+ 80.02133239 76.21174152 85.19895622 90.35586312]
+total accuracy 79.9440 ± 1.8773
+[69.04424403 85.77425967 78.85402981 79.83616079 76.02086815 77.315789
+ 80.42818835 77.38900101 84.39869067 90.30769786]
+
+
+a=0
+while [ $a -lt 5 ]
+do
+    a=`expr $a + 1`
+    b=`expr 4 \* $a`
+    python3 train_times.py --model GAT_SP --random --n_train $b --alpha 0.5 --patience 100 --times 50 --struc_feat eigen --epoch 100000
+
+done
+total accuracy 68.9440 ± 4.7181
+[50.62571565 70.07125018 66.38067969 67.22305708 65.08044751 64.4642681
+ 68.3115317  68.15603958 79.01144047 89.34212149]
+total accuracy 74.6740 ± 2.9937
+[59.69824695 77.84466579 72.75139078 73.65959688 71.78708817 70.24235791
+ 75.64357671 71.67323884 83.15552667 90.20384073]
+
+total accuracy 77.9840 ± 1.6725
+total accuracy 80.8040 ± 1.3967
+total accuracy 80.9130 ± 1.4305
+
+
+#修正版GCNのvalidationなし
+python3 train_times.py --n_train $b --alpha 0
+total accuracy 68.0670 ± 4.7050
+total accuracy 75.0940 ± 2.7060
+total accuracy 77.9120 ± 1.9090
+total accuracy 79.5690 ± 1.5813
+total accuracy 80.8040 ± 1.3967
+
+
+python3 train_times.py --n_train $b --alpha 0.5
+total accuracy 68.0740 ± 4.8780
+total accuracy 75.2750 ± 2.8773
+total accuracy 78.0770 ± 1.9072
+total accuracy 79.7850 ± 1.4342
+total accuracy 80.9130 ± 1.4305
+
+python3 train_times.py --n_train $b --alpha 0 --dataset citeseer
+total accuracy 60.9730 ± 4.0558
+total accuracy 66.2410 ± 2.1899
+total accuracy 68.1580 ± 1.6867
+total accuracy 69.4370 ± 1.5526
+total accuracy 69.8980 ± 1.7309
+
+python3 train_times.py --n_train $b --alpha 0.5 --dataset citeseer
+total accuracy 62.1360 ± 3.5884
+total accuracy 66.9480 ± 1.9776
+total accuracy 68.5200 ± 1.7463
+total accuracy 69.8420 ± 1.6311
+total accuracy 70.1400 ± 1.7622
+
+#修正版GCNのvalidationあり
+python3 train_times.py --n_train $b --alpha 0 --dataset cora --patience 10
+total accuracy 66.2110 ± 5.1470
+total accuracy 74.6370 ± 2.7504
+total accuracy 77.8140 ± 1.9988
+total accuracy 79.5010 ± 1.4768
+total accuracy 80.7280 ± 1.4849
+
+python3 train_times.py --n_train $b --alpha 0.5 --dataset cora --patience 10
+total accuracy 67.3520 ± 4.7892
+total accuracy 75.3330 ± 2.9498
+total accuracy 78.0120 ± 1.8885
+total accuracy 79.8060 ± 1.4960
+total accuracy 80.9690 ± 1.4945
+
+
+python3 train_times.py --n_train $b --random --alpha 0 --dataset cora --patience 100 --epoch 100000
+total accuracy 69.6740 ± 4.6131
+total accuracy 76.4230 ± 2.3425
+total accuracy 78.6300 ± 2.0763
+total accuracy 79.7100 ± 1.3716
+total accuracy 80.8640 ± 1.5571
+python3 train_times.py --n_train $b --random --alpha 0.5 --dataset cora --patience 100 --epoch 100000
+total accuracy 69.5760 ± 4.8342
+total accuracy 76.0730 ± 2.4357
+total accuracy 78.9000 ± 2.0415
+total accuracy 80.1140 ± 1.8155
+total accuracy 81.3380 ± 1.6014
+python3 train_ssconv.py --n_train $b --random --patience 100 --epoch 100000 --model GCN_SS
+total accuracy 68.9700 ± 4.3509
+total accuracy 75.9870 ± 2.5991
+total accuracy 78.7730 ± 1.7356
+total accuracy 80.3390 ± 1.6779
+total accuracy 81.0490 ± 1.5016
+
+python3 train_ssconv.py --n_train 20 --alpha 0.6 --patience 10 --random --model GCN_SS
+total accuracy 80.7210 ± 1.6630
+
+
+
+
+python3 train_3-1.py --random --n_train $b --model GAT_SP --times 100 --epoch 100000 --alpha 0.5
+total accuracy 70.2730 ± 4.2293
+total accuracy 75.8570 ± 2.3263
+total accuracy 78.2090 ± 2.0156
+total accuracy 79.3260 ± 1.6107
+total accuracy 80.1660 ± 1.7649
+
+python3 train_3-1.py --random --n_train $b --model GAT_SP --times 100 --epoch 100000 --alpha 0
+total accuracy 69.6100 ± 4.3269
+total accuracy 75.0100 ± 3.0428
+total accuracy 77.5080 ± 2.3269
+total accuracy 78.9330 ± 1.8914
+total accuracy 79.6340 ± 1.7863
+
+#ssattention
+total accuracy 67.5630 ± 4.8669
+total accuracy 75.3520 ± 2.7437
+total accuracy 78.1420 ± 1.9132
+total accuracy 79.7100 ± 1.4608
+total accuracy 80.9620 ± 1.4134
+
+#ssattention
+total accuracy 67.7220 ± 5.0546
+total accuracy 75.0750 ± 2.4410
+total accuracy 78.1080 ± 2.3194
+total accuracy 79.9200 ± 1.6427
+total accuracy 80.5400 ± 1.7506
+
+#attention 更新されていなかった
+python3 train_2models.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5
+total accuracy 68.8510 ± 4.4689
+total accuracy 75.7640 ± 2.7408
+total accuracy 78.2790 ± 1.9225
+total accuracy 79.7530 ± 2.0573
+total accuracy 80.3530 ± 1.8762
+
+#attention かけた
+python3 train_2models.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5
+total accuracy 68.5930 ± 4.1480
+total accuracy 75.4500 ± 2.6231
+total accuracy 78.1330 ± 1.9948
+total accuracy 79.5650 ± 1.7370
+total accuracy 80.6320 ± 1.5991
+python3 train_2models.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --dataset citeseer
+total accuracy 62.6970 ± 3.2041
+total accuracy 67.1580 ± 2.3325
+total accuracy 68.9080 ± 1.8338
+total accuracy 70.2290 ± 1.5116
+total accuracy 70.3590 ± 1.5340
+
+python3 train_times.py --random --n_train $b --patience 10 --epoch 200 --alpha 0 --dataset citeseer
+total accuracy 59.7530 ± 4.3928
+total accuracy 66.3050 ± 2.1713
+total accuracy 68.3960 ± 1.9234
+total accuracy 69.5230 ± 1.8883
+total accuracy 70.2160 ± 1.4456
+
+python3 train_times.py --random --n_train $b --patience 10 --epoch 200 --alpha 0 --dataset pubmed
+total accuracy 70.9800 ± 4.6631
+total accuracy 75.4310 ± 3.3829
+total accuracy 77.5150 ± 2.2140
+total accuracy 78.7510 ± 2.1834
+total accuracy 79.1500 ± 1.9962
+python3 train_times.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --dataset pubmed
+total accuracy 71.5180 ± 4.4308
+total accuracy 75.7650 ± 2.9035
+total accuracy 77.5700 ± 2.0430
+total accuracy 78.8200 ± 1.9255
+total accuracy 79.7490 ± 1.7596
+
+total accuracy 68.0540 ± 5.0340
+
+
+
+python3 train_random.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 500
+python3 train_2models.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 500
+total accuracy 68.2104 ± 4.6940
+total accuracy 67.4908 ± 5.1720
+total accuracy 75.4036 ± 2.6357
+total accuracy 75.4574 ± 2.7093
+total accuracy 78.1832 ± 1.9949
+total accuracy 78.2486 ± 1.9273
+total accuracy 79.6250 ± 1.6588
+total accuracy 79.7558 ± 1.6937
+total accuracy 80.8614 ± 1.5911
+total accuracy 80.7060 ± 1.5277
+python3 train_times.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --dataset citeseer
+total accuracy 61.5740 ± 4.1990
+total accuracy 67.3660 ± 2.3039
+total accuracy 69.1330 ± 1.7685
+total accuracy 69.7390 ± 1.6684
+total accuracy 70.5360 ± 1.4771
+
+total accuracy 69.3190 ± 4.3633 #train_subatt
+total accuracy 68.0360 ± 4.8620
+total accuracy 68.6710 ± 4.6175
+
+
+#金曜日
+total accuracy 68.0500 ± 4.7982
+total accuracy 67.4310 ± 5.2882
+total accuracy 68.2660 ± 4.2539
+
+
+total accuracy 67.7456 ± 5.2794
+total accuracy 67.7060 ± 4.8585
+total accuracy 67.7830 ± 5.0624
+
+total accuracy 68.3010 ± 5.6018
+total accuracy 75.3600 ± 2.7316
+total accuracy 78.3570 ± 1.9551
+total accuracy 80.3230 ± 1.6988
+total accuracy 80.9140 ± 1.5704
+
+total accuracy 61.3220 ± 3.3483
+total accuracy 66.6070 ± 1.9541
+total accuracy 68.7220 ± 1.7776
+total accuracy 69.9470 ± 1.7296
+total accuracy 70.3820 ± 1.5906
+
+total accuracy 75.1330 ± 2.5350
+total accuracy 75.0210 ± 2.5453
+total accuracy 74.3990 ± 3.1880
+total accuracy 74.7500 ± 3.0120
+
+total accuracy 77.6210 ± 2.2155
+total accuracy 77.7210 ± 1.9113
+total accuracy 77.6870 ± 2.0937
+total accuracy 77.7880 ± 1.8606
+
+total accuracy 79.3340 ± 1.5945
+total accuracy 79.2950 ± 1.8363
+total accuracy 79.2970 ± 1.8260
+total accuracy 79.2430 ± 1.7319
+
+total accuracy 80.1430 ± 1.6730
+total accuracy 80.3670 ± 1.5876
+total accuracy 80.5480 ± 1.7845
+total accuracy 80.4740 ± 1.6712
+
+
+total accuracy 61.9490 ± 3.6334
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+python3 train_random.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 500
+total accuracy 67.7774 ± 5.0768
+total accuracy 67.7224 ± 5.1619
+
+
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300
+(
+total accuracy 68.1790 ± 5.0537
+total accuracy 75.6677 ± 2.6824
+total accuracy 78.3670 ± 1.9321
+total accuracy 79.7410 ± 1.6218
+total accuracy 80.8997 ± 1.6007
+
+
+total accuracy 68.3593 ± 4.6591
+total accuracy 75.4067 ± 2.6364
+total accuracy 78.1347 ± 2.0399
+total accuracy 79.7770 ± 1.8131
+total accuracy 80.8830 ± 1.6361
+)
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300
+total accuracy 67.4583 ± 5.2368
+total accuracy 75.4607 ± 2.7318
+total accuracy 78.3083 ± 1.9684
+total accuracy 79.7673 ± 1.7611
+total accuracy 80.7847 ± 1.5500
+
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0 --times 300
+total accuracy 67.0980 ± 5.3258
+total accuracy 74.9533 ± 2.8559
+total accuracy 77.6097 ± 2.0090
+total accuracy 79.5283 ± 1.7455
+total accuracy 80.5493 ± 1.5719
+
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300 --dataset citeseer
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0 --times 300 --dataset citeseer
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300 --dataset citeseer
+(
+total accuracy 61.5603 ± 3.8473
+total accuracy 60.3960 ± 3.9851
+total accuracy 61.9620 ± 3.7194
+
+total accuracy 66.7160 ± 2.2494
+total accuracy 66.2520 ± 2.1595
+total accuracy 67.3213 ± 2.1889
+
+total accuracy 68.7897 ± 1.7709
+total accuracy 68.3263 ± 1.7269
+total accuracy 68.8957 ± 1.8487
+
+total accuracy 69.8020 ± 1.7345
+total accuracy 69.5207 ± 1.7122
+total accuracy 69.6813 ± 1.7192
+
+total accuracy 70.6570 ± 1.5114
+total accuracy 70.1567 ± 1.6036
+total accuracy 70.5190 ± 1.5181
+)
+
+
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300 --dataset pubmed
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0 --times 300 --dataset pubmed
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300 --dataset pubmed
+total accuracy 70.9037 ± 4.3479
+total accuracy 70.9643 ± 4.0516
+total accuracy 71.2380 ± 3.9441
+
+total accuracy 75.0923 ± 3.0243
+total accuracy 75.4913 ± 2.8299
+total accuracy 75.6303 ± 2.9492
+
+total accuracy 77.1453 ± 2.3533
+total accuracy 77.4797 ± 2.2289
+total accuracy 77.5163 ± 2.5323
+
+total accuracy 78.3797 ± 2.2280
+total accuracy 78.8483 ± 1.9610
+total accuracy 78.7187 ± 1.9699
+
+total accuracy 79.3363 ± 2.0029
+total accuracy 79.7707 ± 1.7600
+
+
+total accuracy 79.6390 ± 2.0949
+
+
+#4Q
+(
+python3 train_subatt.py --random --n_train 4 --patience 10 --epoch 200 --alpha $b --times 100 --dataset cora
+total accuracy 66.2870 ± 6.0229
+total accuracy 67.9290 ± 4.9171
+total accuracy 67.5460 ± 5.1148
+total accuracy 68.7130 ± 4.6623
+total accuracy 68.5140 ± 5.0742
+total accuracy 67.7070 ± 5.6608
+total accuracy 67.7490 ± 5.6110
+total accuracy 67.6290 ± 4.9273
+total accuracy 67.5620 ± 4.6130
+total accuracy 64.3140 ± 5.3946
+total accuracy 13.6850 ± 6.6131
+)
+
+
+python3 train_subatt.py --random --n_train 4 --patience 10 --epoch 200 --alpha $b --times 300 --dataset cora
+total accuracy 66.4613 ± 5.3146
+total accuracy 66.6983 ± 5.6463
+total accuracy 67.0430 ± 5.6625
+total accuracy 67.9000 ± 4.8038
+total accuracy 67.4957 ± 5.1153
+total accuracy 68.4107 ± 4.7668
+total accuracy 68.7770 ± 4.7488
+total accuracy 68.0743 ± 5.0242
+total accuracy 68.2013 ± 4.8026
+total accuracy 63.8093 ± 6.0024
+total accuracy 14.3503 ± 7.6909
+
+python3 tmp_exp.py --random --n_train 4 --patience 10 --epoch 200 --alpha $b --times 300 --dataset cora
+total accuracy 66.1410 ± 5.3592
+total accuracy 67.0170 ± 5.2620
+total accuracy 66.7880 ± 5.6647
+total accuracy 67.6707 ± 5.2706
+total accuracy 68.0197 ± 5.0107
+total accuracy 67.9433 ± 4.7394
+total accuracy 67.5623 ± 5.4574
+total accuracy 67.0120 ± 5.3676
+total accuracy 65.5073 ± 5.9375
+total accuracy 56.3660 ± 5.8377
+total accuracy 14.0793 ± 7.4590
+
+python3 train_subatt.py --random --n_train 6 --patience 10 --epoch 200 --alpha $b --times 300 --dataset citeseer
+total accuracy 59.9830 ± 4.5986
+total accuracy 60.6303 ± 4.3260
+total accuracy 60.5230 ± 4.2272
+total accuracy 61.2603 ± 3.7331
+total accuracy 61.1400 ± 3.9368
+total accuracy 61.0463 ± 3.8758
+total accuracy 62.1400 ± 3.7877
+total accuracy 61.3570 ± 3.8927
+total accuracy 61.3060 ± 3.7606
+total accuracy 56.7337 ± 4.7357
+total accuracy 16.5590 ± 5.0703
+
+python3 tmp_exp.py --random --n_train 6 --patience 10 --epoch 200 --alpha $b --times 300 --dataset citeseer
+total accuracy 59.7793 ± 4.2097
+total accuracy 60.1617 ± 4.2032
+total accuracy 60.6697 ± 4.1029
+total accuracy 61.5357 ± 3.9068
+total accuracy 61.4177 ± 3.6090
+total accuracy 61.9783 ± 3.6100
+total accuracy 61.9140 ± 3.6353
+total accuracy 60.7060 ± 4.2439
+total accuracy 57.9730 ± 4.7147
+total accuracy 48.9577 ± 5.5457
+total accuracy 16.7193 ± 5.4487
+
+(100回の比較
+total accuracy 70.5620 ± 4.2780
+total accuracy 70.8090 ± 4.2326
+total accuracy 70.3340 ± 4.7161
+total accuracy 70.6990 ± 4.3984
+total accuracy 71.4620 ± 4.1758
+total accuracy 70.6920 ± 4.4998
+total accuracy 70.2310 ± 4.6013
+total accuracy 70.4810 ± 4.4711
+total accuracy 69.9110 ± 4.2128
+total accuracy 69.5480 ± 3.7565
+total accuracy 33.7930 ± 9.0721
+
+total accuracy 70.8690 ± 3.7872
+total accuracy 71.6520 ± 3.9112
+total accuracy 71.6190 ± 3.9612
+total accuracy 70.9170 ± 4.2289
+total accuracy 70.8720 ± 4.3395
+total accuracy 71.2410 ± 4.1893
+total accuracy 71.1050 ± 4.0358
+total accuracy 72.0420 ± 3.9891
+total accuracy 72.2020 ± 3.8980
+total accuracy 70.4710 ± 3.7070
+total accuracy 32.6690 ± 10.1359
+)
+python3 train_subatt.py --random --n_train 7 --patience 10 --epoch 200 --alpha $b --times 300 --dataset pubmed
+total accuracy 70.9000 ± 4.1924
+total accuracy 71.0277 ± 4.2243
+total accuracy 70.7450 ± 4.0150
+total accuracy 71.3960 ± 3.9203
+total accuracy 70.9293 ± 4.1819
+total accuracy 70.9430 ± 4.2056
+total accuracy 70.4023 ± 4.5569
+total accuracy 70.5120 ± 4.4747
+total accuracy 70.3510 ± 4.2516
+total accuracy 68.7290 ± 4.8627
+total accuracy 32.9167 ± 9.0187
+
+
+
+
+
+
+
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.6 --times 300 --dataset cora
+total accuracy 68.0060 ± 5.0319
+total accuracy 75.7763 ± 2.4506
+total accuracy 77.9780 ± 1.9900
+total accuracy 79.8487 ± 1.6030
+total accuracy 80.8027 ± 1.6392
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.4 --times 300 --dataset cora
+total accuracy 67.0507 ± 5.1439
+total accuracy 75.4237 ± 2.8898
+total accuracy 78.3420 ± 1.7725
+total accuracy 79.7813 ± 1.7930
+total accuracy 80.7643 ± 1.6186
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.6 --times 300 --dataset citeseer
+total accuracy 61.2663 ± 3.7562
+total accuracy 66.7677 ± 2.2066
+total accuracy 68.8080 ± 1.9686
+total accuracy 69.7283 ± 1.6448
+total accuracy 70.5357 ± 1.5667
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.5 --times 300 --dataset citeseer
+total accuracy 62.1117 ± 3.4850
+total accuracy 67.3097 ± 2.0870
+total accuracy 68.8470 ± 1.8296
+total accuracy 69.9113 ± 1.6070
+total accuracy 70.5433 ± 1.6362
+
+
+
+python3 tmp_exp.py --random --n_train 7 --patience 10 --epoch 200 --alpha $b --times 300 --dataset pubmed
+total accuracy 71.1803 ± 4.2613
+total accuracy 71.2200 ± 4.2592
+total accuracy 71.4750 ± 3.9922
+total accuracy 71.4677 ± 3.8506
+total accuracy 71.0907 ± 4.3934
+total accuracy 71.4177 ± 4.0951
+total accuracy 71.5570 ± 3.6306
+total accuracy 71.7467 ± 3.8599
+total accuracy 71.7823 ± 4.0006
+total accuracy 70.9807 ± 3.4464
+total accuracy 33.7657 ± 10.9699
+python3 train_subatt.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.3 --times 300 --dataset pubmed
+total accuracy 70.8313 ± 4.1592
+total accuracy 75.0883 ± 2.9107
+total accuracy 77.1487 ± 2.4771
+total accuracy 78.5897 ± 2.3293
+total accuracy 79.4673 ± 1.9452
+python3 tmp_exp.py --random --n_train $b --patience 10 --epoch 200 --alpha 0.8 --times 300 --dataset pubmed
+total accuracy 71.4793 ± 4.2329
+total accuracy 75.4423 ± 2.9426
+total accuracy 77.3147 ± 2.3932
+total accuracy 78.1517 ± 2.0899
+total accuracy 78.7237 ± 2.0374
+
+#繰り返し
+total accuracy 68.0177 ± 5.1366
+total accuracy 75.9257 ± 2.5495
+total accuracy 78.2790 ± 1.7793
+total accuracy 79.7323 ± 1.7905
+total accuracy 80.8647 ± 1.5502
+
+total accuracy 67.6253 ± 5.4777
+total accuracy 75.5177 ± 2.7426
+total accuracy 78.3100 ± 1.9900
+total accuracy 79.6493 ± 1.6248
+total accuracy 80.8567 ± 1.5956
+
+total accuracy 61.5203 ± 3.5395
+total accuracy 67.0180 ± 2.0328
+total accuracy 68.6160 ± 1.7408
+total accuracy 69.8033 ± 1.6137
+total accuracy 70.4420 ± 1.6295
+
+total accuracy 62.0027 ± 3.6135
+total accuracy 67.2023 ± 2.1349
+total accuracy 68.7860 ± 1.7388
+total accuracy 69.7490 ± 1.6159
+total accuracy 70.5540 ± 1.5412
+
+break
+total accuracy 68.7220 ± 5.1916
+total accuracy 75.6343 ± 2.5156
+total accuracy 78.4693 ± 1.8520
+total accuracy 79.8537 ± 1.6338
+total accuracy 80.8763 ± 1.4889
+
+total accuracy 67.9550 ± 5.3697
+total accuracy 75.5673 ± 2.4156
+total accuracy 78.2623 ± 1.9257
+total accuracy 79.7933 ± 1.6474
+total accuracy 80.8873 ± 1.5181
+
+total accuracy 61.3033 ± 3.9304
+total accuracy 66.7687 ± 2.0855
+total accuracy 68.7643 ± 1.7503
+total accuracy 69.8763 ± 1.6911
+total accuracy 70.5300 ± 1.5746
+
+total accuracy 61.8900 ± 4.1696
+total accuracy 67.2633 ± 2.1242
+total accuracy 68.8890 ± 1.7970
+total accuracy 69.7660 ± 1.7456
+total accuracy 70.4710 ± 1.5087
+
+break
+total accuracy 67.6930 ± 5.3073
+total accuracy 75.5127 ± 2.5968
+total accuracy 78.3870 ± 2.1389
+total accuracy 79.9547 ± 1.6582
+total accuracy 80.6017 ± 1.6826
+
+total accuracy 66.8417 ± 5.2505
+total accuracy 75.3237 ± 2.7337
+total accuracy 78.3803 ± 1.9413
+total accuracy 79.7733 ± 1.7247
+total accuracy 80.8473 ± 1.5291
+
+total accuracy 61.1117 ± 3.9703
+total accuracy 66.8217 ± 2.3106
+total accuracy 68.8133 ± 1.7123
+total accuracy 70.0663 ± 1.6801
+total accuracy 70.3597 ± 1.6330
+
+total accuracy 62.2167 ± 3.5696
+total accuracy 67.1837 ± 2.0983
+total accuracy 68.7423 ± 1.7728
+total accuracy 69.9117 ± 1.6726
+total accuracy 70.5000 ± 1.6189
+
+break
+total accuracy 67.9953 ± 5.2563
+total accuracy 75.5683 ± 2.6370
+total accuracy 78.2630 ± 1.9877
+total accuracy 79.8340 ± 1.6129
+total accuracy 80.8357 ± 1.4979
+
+total accuracy 68.0893 ± 5.3848
+total accuracy 75.6477 ± 2.7154
+total accuracy 78.3960 ± 1.8458
+total accuracy 79.7237 ± 1.5973
+total accuracy 80.7990 ± 1.4937
+
+total accuracy 61.3990 ± 4.1155
+total accuracy 66.8793 ± 2.0561
+total accuracy 68.7637 ± 1.8497
+total accuracy 69.7117 ± 1.6589
+total accuracy 70.4670 ± 1.6801
+
+total accuracy 61.7167 ± 3.7182
+total accuracy 67.1293 ± 2.1598
+total accuracy 68.8897 ± 1.9232
+total accuracy 69.8510 ± 1.6124
+total accuracy 70.4497 ± 1.5879
+
+break
+total accuracy 67.9987 ± 4.7751
+total accuracy 75.4670 ± 2.5399
+total accuracy 78.4747 ± 1.8857
+total accuracy 79.7753 ± 1.7787
+total accuracy 80.7847 ± 1.4651
+
+total accuracy 67.9100 ± 5.2277
+total accuracy 75.2193 ± 2.9604
+total accuracy 78.1917 ± 1.8524
+total accuracy 79.7250 ± 1.7963
+total accuracy 80.7890 ± 1.6839
+
+total accuracy 61.0947 ± 3.7954
+total accuracy 66.8503 ± 2.1674
+total accuracy 68.8227 ± 1.7410
+total accuracy 69.8060 ± 1.6522
+total accuracy 70.4977 ± 1.6110
+
+total accuracy 61.9053 ± 3.7089
+total accuracy 67.2697 ± 2.2165
+total accuracy 68.8440 ± 1.8479
+total accuracy 69.9000 ± 1.5856
+total accuracy 70.6590 ± 1.6985
+
+break
+total accuracy 68.3730 ± 4.7817
+total accuracy 75.7503 ± 2.5517
+total accuracy 78.2637 ± 1.9256
+total accuracy 79.8280 ± 1.7403
+total accuracy 80.7440 ± 1.5451
+
+total accuracy 67.4900 ± 5.4050
+total accuracy 75.5270 ± 2.7035
+total accuracy 78.2020 ± 2.1257
+total accuracy 79.7823 ± 1.6751
+total accuracy 80.8220 ± 1.5476
+
+total accuracy 61.1267 ± 3.6333
+total accuracy 66.8187 ± 2.2414
+total accuracy 68.7587 ± 1.7385
+total accuracy 69.9183 ± 1.5983
+total accuracy 70.5910 ± 1.5540
+
+total accuracy 62.0957 ± 3.6052
+total accuracy 67.2590 ± 2.1483
+total accuracy 69.0153 ± 1.7664
+total accuracy 69.9170 ± 1.7435
+total accuracy 70.6377 ± 1.6196
+
+break
+total accuracy 68.1530 ± 4.9123
+total accuracy 75.5150 ± 2.6447
+total accuracy 78.3723 ± 1.9858
+total accuracy 79.9547 ± 1.7609
+total accuracy 80.9503 ± 1.5167
+
+total accuracy 68.2260 ± 4.9098
+total accuracy 75.5553 ± 2.4090
+total accuracy 78.1780 ± 2.0699
+total accuracy 79.6077 ± 1.6744
+total accuracy 80.7003 ± 1.5281
+
+total accuracy 61.3780 ± 3.9556
+total accuracy 66.7877 ± 2.0490
+total accuracy 68.7947 ± 1.7973
+total accuracy 69.6757 ± 1.7045
+total accuracy 70.6010 ± 1.5890
+
+total accuracy 62.4170 ± 3.5722
+total accuracy 67.1317 ± 2.0702
+total accuracy 68.8837 ± 1.8122
+total accuracy 69.9113 ± 1.6697
+total accuracy 70.3683 ± 1.5137
+
+break
+total accuracy 68.0757 ± 5.0008
+total accuracy 75.7427 ± 2.4844
+total accuracy 78.2547 ± 2.0618
+total accuracy 79.8823 ± 1.7422
+total accuracy 80.6737 ± 1.4708
+
+total accuracy 67.3847 ± 5.2732
+total accuracy 75.6027 ± 2.5540
+total accuracy 78.2130 ± 2.0949
+total accuracy 80.0153 ± 1.7686
+total accuracy 80.7780 ± 1.4060
+
+
+
+
+
+
+total accuracy 66.3987 ± 5.7050
+total accuracy 66.5977 ± 5.5369
+total accuracy 66.6347 ± 5.7230
+total accuracy 66.9637 ± 5.2559
+total accuracy 67.2213 ± 5.2272
+total accuracy 67.0317 ± 5.1012
+total accuracy 67.6520 ± 5.0625
+total accuracy 67.8350 ± 5.2239
+total accuracy 66.9760 ± 5.1624
+total accuracy 65.3280 ± 5.6185
+total accuracy 14.7537 ± 6.4534
+
+
+#全体にattentionをかけた場合のcoraの精度（低い）
+python3 train_subatt.py --random --n_train 6 --patience 10 --epoch 200 --alpha $b --times 300 --dataset citeseer --model GCN_subatt_test
+total accuracy 60.3490 ± 4.2139
+total accuracy 60.8230 ± 3.9857
+total accuracy 60.2530 ± 4.1029
+total accuracy 60.5763 ± 4.1747
+total accuracy 60.4777 ± 4.3722
+total accuracy 61.2303 ± 3.9743
+total accuracy 60.9950 ± 3.9248
+total accuracy 60.6240 ± 4.0272
+total accuracy 59.0240 ± 4.9610
+total accuracy 16.5843 ± 4.5970
+
+#coraの分布
+total accuracy 69.9963 ± 4.1955
+total accuracy 69.8517 ± 4.3435
+
+total accuracy 69.8923 ± 4.5889
+total accuracy 70.0443 ± 3.9033
+
+total accuracy 69.8197 ± 4.8315
+total accuracy 70.1860 ± 4.0122
+
+total accuracy 70.6590 ± 4.1568
+total accuracy 69.9967 ± 4.2265
+
+total accuracy 70.3633 ± 4.3533
+total accuracy 69.8507 ± 4.3480
+
+total accuracy 70.1853 ± 4.5367
+total accuracy 69.3767 ± 4.5405
+
+total accuracy 70.4287 ± 4.1986
+total accuracy 69.2280 ± 4.9611
+
+total accuracy 69.8903 ± 4.6837
+total accuracy 68.8567 ± 4.6761
+
+total accuracy 70.2770 ± 4.3278
+total accuracy 68.1723 ± 5.4752
+
+total accuracy 68.0723 ± 5.1632
+total accuracy 65.6097 ± 5.7658
+
+total accuracy 8.1777 ± 3.9281
+total accuracy 6.5610 ± 0.6103
+
+#citeseer
+total accuracy 61.9290 ± 4.0452
+total accuracy 62.3967 ± 3.5286
+total accuracy 62.3793 ± 3.5561
+total accuracy 62.4790 ± 3.8144
+total accuracy 62.7020 ± 3.6067
+total accuracy 62.4107 ± 3.8533
+total accuracy 62.8077 ± 3.4708
+total accuracy 62.2927 ± 3.4827
+total accuracy 62.3580 ± 3.5685
+total accuracy 60.2503 ± 4.2898
+total accuracy 15.5757 ± 1.9682
+
+total accuracy 61.9617 ± 3.3942
+total accuracy 62.5157 ± 3.2060
+total accuracy 62.8733 ± 3.5110
+total accuracy 62.8267 ± 3.4745
+total accuracy 62.9140 ± 3.5359
+total accuracy 62.7290 ± 3.5434
+total accuracy 62.3347 ± 3.9327
+total accuracy 61.8530 ± 4.2255
+total accuracy 61.3343 ± 3.9183
+total accuracy 58.9940 ± 4.4897
+total accuracy 15.2663 ± 1.0628
+
+
+
+
